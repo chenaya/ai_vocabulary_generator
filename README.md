@@ -41,11 +41,11 @@ git commit -m "這次所執行的變更"
 git push origin main
 ```
 
-# …or create a new repository on the command line 第一次推送到github
+## 第一次推送到github
 ```
 git init 建立一個隱藏資料夾
-git add .
-git commit -m "first commit"
+git add . .=所有檔案
+git commit -m "first commit" 
 git branch -M main
 git remote add origin https://github.com/chenaya/ai_vocabulary_generator.git
 git push -u origin main
