@@ -31,10 +31,10 @@ export async function POST(req) {
     // 文件連結: https://platform.openai.com/docs/guides/images/usage
 
     const response = await openai.images.generate({
-        model: "dall-e-3",
+        model: "dall-e-2",
         prompt: userInput,
         n: 1,
-        size: "1024x1024"
+        size: "256x256"
     })
 
     //openai產生暫時的圖片網址
@@ -60,8 +60,8 @@ export async function POST(req) {
         createdAt: new Date().getTime(),
     }
 
-    await db.collection("image-ai").add(data) //將資料存在firestore的image-ai集合
-    //await會提醒錯誤訊息
+    db.collection("image-ai").add(data) //將資料存在firestore的image-ai集合
+    //await會提醒錯誤訊息 await db.collection("image-ai").add(data)
 
     return Response.json(data);
 }

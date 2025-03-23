@@ -7,8 +7,8 @@ export default function ImageGenCard({ imageURL, prompt, createdAt }) {
             <img
                 src={imageURL}
                 alt={prompt}
-                width={1024}
-                height={1024}
+                width={256}
+                height={256}
                 className="w-full"
             />
             <div className="p-3">
