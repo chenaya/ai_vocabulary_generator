@@ -43,10 +43,10 @@ git push origin main
 
 ## 第一次推送到github
 ```
-git init 建立一個隱藏資料夾
-git add . .=所有檔案
+git init <<建立一個隱藏資料夾>>
+git add . <<.=所有檔案>>
 git commit -m "first commit" 
-git branch -M main
+git branch -M main 
 git remote add origin https://github.com/chenaya/ai_vocabulary_generator.git
 git push -u origin main
 ```
