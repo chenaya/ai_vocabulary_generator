@@ -50,3 +50,30 @@ git branch -M main
 git remote add origin https://github.com/chenaya/ai_vocabulary_generator.git
 git push -u origin main
 ```
+
+# git 指令
+
+## 檢視目前你所在的分支相關資訊
+git status 
+
+## 切換分支
+git checkout 分支名稱
+
+## 切換到main分支
+git checkout main
+
+## 切換到feature/add-firebase分支
+git checkout feature/add-firebase
+
+## 切換到feature/add-tts-and-widget-ui
+git checkout feature/add-tts-and-widget-ui
+
+## 新增分支
+git checkout -b 想要新增的分支名稱
+git checkout -b feature/add-tts-and-widget-ui
+
+## 列出所有分支
+git branch -a
+
+## 當工作成果完成後把分支推到github
+git push origin HEAD
