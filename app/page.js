@@ -8,6 +8,7 @@ import PageHeader from "@/components/PageHeader";
 import GeneratorButton from "@/components/GenerateButton";
 import VocabGenResultCard from "@/components/VocabGenResultCard";
 import VocabGenResultPlaceholder from "@/components/VocabGenResultPlaceholder";
+import ToastAlert from "@/components/ToastAlert";
 
 export default function Home() {
   const [userInput, setUserInput] = useState("");
@@ -17,6 +18,7 @@ export default function Home() {
   const [vocabList, setVocabList] = useState([]);
   // 是否在等待回應
   const [isWaiting, setIsWaiting] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   const languageList = ["English", "Japanese", "Korean", "Spanish", "French", "German", "Italian", "Norwegian", "Arabic"];
 
@@ -32,6 +34,16 @@ export default function Home() {
       });
   }, []); // 空陣列代表只在組件掛載時執行一次
 
+  const handleCopyToInput = (text) => {
+    setUserInput(text);
+    setShowToast(true);
+    // 平滑滾動到頁面頂部
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const submitHandler = (e) => {
     // 防止會重整的預設行為
     e.preventDefault();
@@ -45,7 +57,7 @@ export default function Home() {
     setIsWaiting(true);
     // 清空輸入框
     setUserInput("");
-        
+
     // 透過axios將body POST到 /api/vocab-ai
     // 並使用then以及catch的方式分別印出後端的回應
     axios.post('/api/vocab-ai', body)
@@ -69,7 +81,7 @@ export default function Home() {
   return (
     <>
       <CurrentFileIndicator filePath="/app/page.js" />
-      <PageHeader title="AI Vocabulary Generator" icon={faEarthAmericas} />
+      <PageHeader title="AI單字聯想生成器" icon={faEarthAmericas} />
       <section>
         <div className="container mx-auto">
           <form onSubmit={submitHandler}>
@@ -107,17 +119,25 @@ export default function Home() {
         <div className="container mx-auto">
           {/* 等待後端回應時要顯示的載入畫面 */}
           {isWaiting ? <VocabGenResultPlaceholder /> : null}
-          
+
           {/* 顯示所有單字卡 */}
           {vocabList.map((result, index) => (
             <VocabGenResultCard
               key={result.createdAt + index}
               result={result}
+              onCopyToInput={handleCopyToInput}
             />
           ))}
 
         </div>
       </section>
+
+      {showToast && (
+        <ToastAlert
+          message="已複製到輸入框！"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </>
   );
 }
