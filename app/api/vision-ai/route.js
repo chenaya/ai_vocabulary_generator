@@ -1,13 +1,9 @@
 import openai from "@/services/openai";
+import db from "@/services/db";
 
 export async function POST(req) {
     const body = await req.json();
     const { base64 } = body;
-    console.log("body:", body);
-    // TODO: 透過base64讓AI辨識圖片
-    // 文件連結：https://platform.openai.com/docs/guides/vision?lang=node
-    // const systemPrompt = ``;
-    // const propmpt = ``;
 
     try {
         const response = await openai.chat.completions.create({
@@ -62,7 +58,6 @@ export async function POST(req) {
         console.error('OpenAI API 錯誤:', error);
         return Response.json({ error: '影像辨識過程發生錯誤' }, { status: 500 });
     }
-
 }
 
 // GET API 用於獲取歷史記錄
