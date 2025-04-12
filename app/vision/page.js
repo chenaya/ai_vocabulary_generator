@@ -8,6 +8,7 @@ import { faEye, faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VocabGenResultCard from "@/components/VocabGenResultCard";
 
+
 export default function Vision() {
     // 是否在等待回應
     const [isWaiting, setIsWaiting] = useState(false);
